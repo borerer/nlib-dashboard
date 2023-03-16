@@ -13,7 +13,7 @@ import { ReactNode } from 'react';
 import React from 'react';
 
 function Navigation() {
-  const [selected, setSelected] = React.useState('Chat');
+  const [selected, setSelected] = React.useState('KV');
 
   const handleClick = (text: string) => {
     setSelected(text);
