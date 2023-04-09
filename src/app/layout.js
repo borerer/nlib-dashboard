@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import './globals.css'
-import Nav from './nav'
-import React from 'react'
+import './globals.css';
+import Nav from './nav';
+import React from 'react';
 
 export default function RootLayout({ children }) {
   const [page, setPage] = React.useState('apps');
