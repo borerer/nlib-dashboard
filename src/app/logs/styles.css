@@ -1,0 +1,69 @@
+.logs {
+
+}
+
+.log-line {
+    display: flex;
+    width: 100%;
+    /* padding: 2px 0 2px 0; */
+}
+
+.debug {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.info {
+    background-color: rgba(2, 136, 209, 0.1);
+}
+
+.warn {
+    background-color: rgba(237, 108, 2, 0.15);
+}
+
+.error {
+    background-color: rgba(211, 47, 47, 0.2);
+}
+
+.timestamp {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size: 0.5em;
+    width: 150px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+span {
+    white-space:pre;
+}
+
+.app-id {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    width: 100px;
+    font-size: 0.5em;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.level {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    width: 60px;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    flex: 1;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 40%;
+}
