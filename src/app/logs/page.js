@@ -68,8 +68,8 @@ export default function Logs() {
 
   return (
     <div className='logs'>
-        {logs.map(log => {
-            return <div className={`log-line ${log.level}`}>
+        {logs.map((log, idx) => {
+            return <div className={`log-line ${log.level}`} key={idx}>
               {timestamp(log.timestamp)}
               <div className='app-id'>
                 <span>
@@ -85,7 +85,7 @@ export default function Logs() {
               </div>
               <div className='details'>
                 {Object.keys(log.details).filter(k => k != 'app_id').sort().map(k => {
-                  return <Tooltip title={k}>
+                  return <Tooltip title={k} key={k}>
                     <Chip label={log.details[k]} size='small'></Chip>
                   </Tooltip>
                 })}
