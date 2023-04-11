@@ -7,6 +7,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import Chip from '@mui/material/Chip';
 import axios from 'axios';
 import Tooltip from '@mui/material/Tooltip';
+import Pagination from '@mui/material/Pagination';
 
 dayjs.extend(relativeTime);
 axios.defaults.baseURL = 'https://nlib.home.iloahz.com';
@@ -20,6 +21,8 @@ const levelToColorMap = {
 
 export default function Logs() {
 
+  const pageSize = 30;
+  const [page, setPage] = React.useState(1);
   const [logs, setLogs] = React.useState([]);
   const [useFromNow, setUseFromNow] = React.useState(true);
 
@@ -29,13 +32,18 @@ export default function Logs() {
   }
 
   const updateLogs = async () => {
-    const res = await getLogs(50, 0);
+    const skip = pageSize * (page - 1);
+    const res = await getLogs(pageSize, skip);
     setLogs(res);
+  }
+
+  const onPageChange = (e, p) => {
+    setPage(p);
   }
 
   useEffect(() => {
     updateLogs();
-  }, [setLogs]);
+  }, [setLogs, page]);
 
   const levelToColor = (level) => {
     if (levelToColorMap[level] != null) {
@@ -52,14 +60,14 @@ export default function Logs() {
   const timestamp = (t) => {
     const date = dayjs(t);
     if (useFromNow) {
-      return <div className='timestamp' onClick={() => setUseFromNow(false)}>
-        <span>
+      return <div className='timestamp'>
+        <span className='timestamp-text' onClick={() => setUseFromNow(false)}>
           {`[ ${paddingAround(date.fromNow(), 21)} ]`}
         </span>
       </div>
     } else {
-      return <div className='timestamp' onClick={() => setUseFromNow(true)}>
-        <span>
+      return <div className='timestamp'>
+        <span className='timestamp-text' onClick={() => setUseFromNow(true)}>
           {`[ ${date.format('YY-MM-DD HH:mm:ss.SSS')} ]`}
         </span>
       </div>
@@ -68,6 +76,7 @@ export default function Logs() {
 
   return (
     <div className='logs'>
+      <div>
         {logs.map((log, idx) => {
             return <div className={`log-line ${log.level}`} key={idx}>
               {timestamp(log.timestamp)}
@@ -92,6 +101,10 @@ export default function Logs() {
               </div>
             </div>
         })}
+      </div>
+      <div className='pagination'>
+        <Pagination count={999} onChange={onPageChange}></Pagination>
+      </div>
     </div>
   );
 }

@@ -13,7 +13,7 @@ import Link from 'next/link';
 const pages = [
   {
     id: 'apps',
-    href: '/apps',
+    href: '/',
     title: 'Apps',
     icon: <AppsIcon/>
   },

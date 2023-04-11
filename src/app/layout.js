@@ -10,10 +10,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <section>
-          <Nav page={page} setPage={setPage}/>
-          {children}
-        </section>
+        <div className='app'>
+          <div className='nav'>
+            <Nav page={page} setPage={setPage}/>
+          </div>
+          <div className='content'>
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   )
