@@ -80,7 +80,7 @@ export default function Logs() {
     <div className='logs'>
       <div>
         {logs.map((log, idx) => {
-          return <SimpleLogLine log={log}></SimpleLogLine>
+          return <SimpleLogLine log={log} key={idx}></SimpleLogLine>
         })}
       </div>
       <div className='pagination'>
