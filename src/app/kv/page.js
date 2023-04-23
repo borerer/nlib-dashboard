@@ -7,7 +7,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-// import './KVPage.css';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -15,7 +14,6 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import CheckIcon from '@mui/icons-material/Check';
 import SaveIcon from '@mui/icons-material/Save';
 import { TextField } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
@@ -72,18 +70,19 @@ export default function KV() {
     }}></TextField>
   }
 
-  const onSaveClicked = (kv, index) => {
-    return async () => {
-        setIsEditing(-1);
-        try {
-            await api.saveKV(kv);
-        } catch(e) {
-            toast(`save ${kv.key} failed`);
-            return;
-        }
-        toast(`save ${kv.key} success`);
-        await updateKVList();
+  const onSaveClicked = async (kv, index) => {
+    setIsEditing(-1);
+    try {
+      await api.saveKV(kv);
+    } catch(e) {
+      toast(`save ${kv.key} failed`);
+      return;
     }
+    toast(`save ${kv.key} success`);
+    await updateKVList();
+  }
+
+  const onDeleteClicked = async (kv, index) => {
   }
 
   const onAddClicked = async () => {
@@ -121,7 +120,8 @@ export default function KV() {
                             <TableCell>{valueCell}</TableCell>
                             <TableCell>{date.fromNow()}</TableCell>
                             <TableCell>
-                                <SaveIcon onClick={onSaveClicked(kv, index)}></SaveIcon>
+                                <SaveIcon onClick={() => onSaveClicked(kv, index)}></SaveIcon>
+                                <DeleteIcon onClick={() => onDeleteClicked(kv, index)}></DeleteIcon>
                             </TableCell>
                         </TableRow>)
                     })}

@@ -8,6 +8,8 @@ import Chip from '@mui/material/Chip';
 import axios from 'axios';
 import Tooltip from '@mui/material/Tooltip';
 import Pagination from '@mui/material/Pagination';
+import Collapse from '@mui/material/Collapse';
+import SimpleLogLine from './simple-log-line';
 
 dayjs.extend(relativeTime);
 axios.defaults.baseURL = 'https://nlib.home.iloahz.com';
@@ -21,7 +23,7 @@ const levelToColorMap = {
 
 export default function Logs() {
 
-  const pageSize = 30;
+  const pageSize = 50;
   const [page, setPage] = React.useState(1);
   const [logs, setLogs] = React.useState([]);
   const [useFromNow, setUseFromNow] = React.useState(true);
@@ -78,28 +80,7 @@ export default function Logs() {
     <div className='logs'>
       <div>
         {logs.map((log, idx) => {
-            return <div className={`log-line ${log.level}`} key={idx}>
-              {timestamp(log.timestamp)}
-              <div className='app-id'>
-                <span>
-                  {`[ ${paddingAround(log.details['app_id'], 11)} ]`}
-                </span>
-                {/* <Chip label={log.details['app_id']} size='small'></Chip> */}
-              </div>
-              {/* <div className='level'>
-                <Chip label={log.level} size='small' color={levelToColor(log.level)}></Chip>
-              </div> */}
-              <div className='message'>
-                <span>{log.message}</span>
-              </div>
-              <div className='details'>
-                {Object.keys(log.details).filter(k => k != 'app_id').sort().map(k => {
-                  return <Tooltip title={k} key={k}>
-                    <Chip label={log.details[k]} size='small'></Chip>
-                  </Tooltip>
-                })}
-              </div>
-            </div>
+          return <SimpleLogLine log={log}></SimpleLogLine>
         })}
       </div>
       <div className='pagination'>

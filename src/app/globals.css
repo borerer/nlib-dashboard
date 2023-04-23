@@ -10,6 +10,10 @@ html, body, main {
     font-family: 'Roboto Mono';
 }
 
+body {
+    background: rgba(0, 0, 0, 0.05);
+}
+
 .app {
     display: flex;
     width: 100%;
@@ -18,9 +22,11 @@ html, body, main {
 
 .nav {
     width: 200px;
+    height: 100%;
 }
 
 .content {
-    flex: 1;
+    width: calc(100% - 200px);
+    height: 100%;
     overflow: hidden;
 }
